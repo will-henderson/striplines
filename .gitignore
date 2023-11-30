@@ -1,0 +1,6 @@
+# ignore build files
+dist/
+build/
+striplines.egg-info/
+.ipynb_checkpoints/
+

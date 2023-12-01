@@ -1,5 +1,5 @@
 import numpy as np
-from strip import StripLine
+from .strip import StripLine
 
 class CPW:
     def __init__(self, signal_width, ground_width, separation, lift=0, height=0):

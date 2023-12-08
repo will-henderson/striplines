@@ -42,8 +42,8 @@ class StripLine:
             
             Bx = - μ0 * I / (2*np.pi*w*h) * \
                 ( h * (np.arctan((w/2 - x_)/(z_ - h)) + np.arctan((w/2 + x_)/(z_ - h))) \
-                + z * (np.arctan((z_ - h)/(w/2 - x_)) + np.arctan((z_ - h)/(w/2 + x_))) \
-                - z * (np.arctan(z_/ (w/2 - x_)) + np.arctan(z_/ (w/2 + x_))) \
+                + z_ * (np.arctan((z_ - h)/(w/2 - x_)) + np.arctan((z_ - h)/(w/2 + x_))) \
+                - z_ * (np.arctan(z_/ (w/2 - x_)) + np.arctan(z_/ (w/2 + x_))) \
                 + w/4 * np.log(((w/2 + x_)**2 + z_**2 ) * ((w/2 - x_)**2 + z_**2) / (((w/2 + x_)**2 + (h - z_)**2 ) * ((w/2 - x_)**2 + (h - z_)**2))) \
                 + x_/2 * np.log(((w/2 + x_)**2 + z_**2 ) * ((w/2 - x_)**2 + (h - z_)**2) / (((w/2 + x_)**2 + (h - z_)**2 ) * ((w/2 - x_)**2 + z_**2))) \
                 )

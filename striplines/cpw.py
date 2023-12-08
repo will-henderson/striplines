@@ -2,11 +2,11 @@ import numpy as np
 from .strip import StripLine
 
 class CPW:
-    def __init__(self, signal_width, ground_width, separation, lift=0, height=0):
+    def __init__(self, signal_width, ground_width, separation, height=0, lift=0):
         self.signal_width = signal_width
         self.ground_width = ground_width
         self.separation = separation
-        self.centre_sep = separation + signal/2 + ground/2
+        self.centre_sep = separation + signal_width/2 + ground_width/2
         self.lift = lift
         self.height = height
         self.total_width = signal_width + 2*(ground_width + separation)
@@ -40,7 +40,7 @@ class CPW:
         
         Bx_gl, Bz_gl = self.ground_left.fourier_field(-.5 * I, x, z)
         Bx_gr, Bz_gr = self.ground_right.fourier_field(-.5 * I, x, z)
-        Bx_s,  Bz_s  = self.signal.field(I, x, z)
+        Bx_s,  Bz_s  = self.signal.fourier_field(I, x, z)
         
         Bx = Bx_gl + Bx_gr + Bx_s
         Bz = Bz_gl + Bz_gr + Bz_s

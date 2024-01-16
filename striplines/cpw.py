@@ -38,9 +38,9 @@ class CPW:
     
     def fourier_field(self, I, kx, z):
         
-        Bx_gl, Bz_gl = self.ground_left.fourier_field(-.5 * I, x, z)
-        Bx_gr, Bz_gr = self.ground_right.fourier_field(-.5 * I, x, z)
-        Bx_s,  Bz_s  = self.signal.fourier_field(I, x, z)
+        Bx_gl, Bz_gl = self.ground_left.fourier_field(-.5 * I, kx, z)
+        Bx_gr, Bz_gr = self.ground_right.fourier_field(-.5 * I, kx, z)
+        Bx_s,  Bz_s  = self.signal.fourier_field(I, kx, z)
         
         Bx = Bx_gl + Bx_gr + Bx_s
         Bz = Bz_gl + Bz_gr + Bz_s

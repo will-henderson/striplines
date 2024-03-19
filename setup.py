@@ -11,6 +11,9 @@ setuptools.setup(
         "License :: OSI Approved :: MIT License"
     ], 
     python_requires= '>3.0',
+    install_requires=[
+        'numpy',
+    ],
     py_modules=["striplines"],
     package_dir={'':'.'}
 )

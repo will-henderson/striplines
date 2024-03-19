@@ -1,4 +1,5 @@
 import numpy as np
+from .wire import Wire, ThickWire
 
 μ0 = np.pi * 4e-7
 
@@ -22,8 +23,8 @@ class StripLine:
         Parameters:
             points (int): number of points in the array. 
             sideroom (number): the returned array contains sideroom zeros either side of the ones.
-        '''
-        x = np.linspace(centre - (sideroom+.5)*self.width, centre + (sideroom+.5)*self.width, points)
+        ''' 
+        x = np.linspace(self.centre - (sideroom+.5)*self.width, self.centre + (sideroom+.5)*self.width, points)
         y = self.profile(x)
         
         return x, y
@@ -62,16 +63,15 @@ class StripLine:
         w = self.width
         h = self.height
         z_ = -self.lift + z
+
         if h == 0:
-            if z_ == 0:
-                wirex = -μ0*I / (2*w)
-            else:
-                wirex = -μ0*I / (2*w) * np.exp(-np.abs(kx * z))  
-            wirez = -1j * wirex * np.where(kx > 0, 1, -1)
+            wire = Wire()
+            wirex, wirez = wire.fourier_field(I/w, kx, z_)
+
         else: 
-            wirex = -μ0*I / (2*w*h) * np.where(kx == 0, self.height, (np.exp(-np.abs(kx * (h-z_))) - np.exp(-np.abs(kx*z_))) / np.abs(kx) * np.where(z_ > 0, 1, -1))
-            wirez = -1j * wirex * np.where(kx > 0, 1, -1)
-            
+            wire = ThickWire()
+            wirex, wirez = wire.fourier_field(I/w, kx, z_)
+
         # then just do convolution with a top hat function
         # just product in fourier space.
         #convolved with delta function if off centre
@@ -82,8 +82,6 @@ class StripLine:
         Bz = wirez * thft
         
         return Bx, Bz
-                
-
 
 
 def TH(center, width, x):
